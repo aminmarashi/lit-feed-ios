@@ -34,6 +34,42 @@ struct ContentView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
+      HStack {
+        Button(action: {
+          // Handle hamburger button tap
+        }) {
+          Image(systemName: "line.horizontal.3")
+            .font(.system(size: 20))
+            .foregroundColor(.primary)
+        }
+        .padding(.leading, 10)
+        Spacer()
+        Button(action: {
+          // Handle eye button tap
+        }) {
+          Image(systemName: "eye")
+            .font(.system(size: 20))
+            .foregroundColor(.primary)
+        }
+        .padding(.trailing, 10)
+        Button(action: {
+          // Handle magnifying glass button tap
+        }) {
+          Image(systemName: "magnifyingglass")
+            .font(.system(size: 20))
+            .foregroundColor(.primary)
+        }
+        .padding(.trailing, 10)
+        Button(action: {
+          // Handle checkmark button tap
+        }) {
+          Image(systemName: "checkmark.circle")
+            .font(.system(size: 20))
+            .foregroundColor(.primary)
+        }
+        .padding(.trailing, 10)
+      }
+      .frame(height: 20)
       VStack(alignment: .leading) {
         Text("All articles")
           .font(.largeTitle)
