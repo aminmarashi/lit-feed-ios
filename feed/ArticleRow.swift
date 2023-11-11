@@ -5,26 +5,20 @@ struct ArticleRow: View {
 
   var body: some View {
     HStack {
-      if let image = UIImage(named: article.image) {
-        Image(uiImage: image)
-          .resizable()
-          .frame(width: 50, height: 50)
-          .cornerRadius(10)
-          .opacity(article.isRead ? 0.5 : 1.0)
-          .padding(.leading, -8)
-      } else {
-        Image(systemName: "photo")
-          .resizable()
-          .frame(width: 50, height: 50)
-          .cornerRadius(10)
-          .foregroundColor(.gray)
-          .padding(.leading, -8)
-      }
+      Image(systemName: "photo")
+        .resizable()
+        .frame(width: 50, height: 50)
+        .cornerRadius(10)
+        .foregroundColor(.gray)
+        .padding(.leading, -8)
+
       VStack(alignment: .leading) {
-        Text(article.title)
+        NavigationLink(article.title, value: article)
+          .foregroundColor(.primary)
           .font(.headline)
           .fontWeight(.bold)
           .opacity(article.isRead ? 0.5 : 1.0)
+
         Text(article.summary)
           .font(.subheadline)
           .opacity(article.isRead ? 0.5 : 1.0)
@@ -57,5 +51,10 @@ struct Article: Identifiable, Hashable {
 }
 
 #Preview {
+  NavigationStack {
     ArticleRow(article: sampleArticles[1])
+      .navigationDestination(for: Article.self) { article in
+        ArticleView(article: article)
+      }
+  }
 }

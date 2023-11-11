@@ -10,28 +10,27 @@ import SwiftUI
 struct ArticleView: View {
     let article: Article?
     var body: some View {
+      if let foundArticle = article {
         VStack {
-            if let image = UIImage(named: article?.image ?? "") {
-              Image(uiImage: image)
-                .resizable()
-                .frame(width: 200, height: 200)
-                .cornerRadius(10)
-                .opacity(article?.isRead ?? false ? 0.5 : 1.0)
-                .padding(.leading, -8)
-            } else {
-              Image(systemName: "photo")
-                .resizable()
-                .frame(width: 200, height: 200)
-                .cornerRadius(10)
-                .foregroundColor(.gray)
-                .padding(.leading, -8)
-            }
-            Text(article?.title ?? "")
-            Text(article?.summary ?? "")
-        }
+          
+            Image(systemName: "photo")
+              .resizable()
+              .frame(width: 200, height: 200)
+              .cornerRadius(10)
+              .foregroundColor(.gray)
+              .padding(.leading, -8)
+          }
+          Text(foundArticle.summary)
+        
+        .navigationTitle(foundArticle.title)
+      } else {
+        Text("No articles found")
+      }
     }
 }
 
 #Preview {
+  NavigationStack {
     ArticleView(article: sampleArticles[0])
+  }
 }
