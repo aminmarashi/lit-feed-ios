@@ -33,13 +33,13 @@ struct ContentView: View {
         Label("Feeds", systemImage: "list.bullet.rectangle.portrait")
       }
       Text("under construction filters")
-      .tabItem {
-        Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
-      }
+        .tabItem {
+          Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
+        }
       Text("under construction settings")
-      .tabItem {
-        Label("Settings", systemImage: "gear")
-      }
+        .tabItem {
+          Label("Settings", systemImage: "gear")
+        }
     }
   }
 }

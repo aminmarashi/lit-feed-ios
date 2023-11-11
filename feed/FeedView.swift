@@ -23,7 +23,7 @@ struct FeedView: View {
             .foregroundColor(.gray)
         }
         .padding(.leading, 10)
-        
+
         Spacer()
         Button(action: {
           // Handle eye button tap
@@ -54,7 +54,7 @@ struct FeedView: View {
         .buttonStyle(PlainButtonStyle())
       }
       .frame(height: 20)
-      
+
       List(articles, selection: $selectedArticle) { article in
         ArticleRow(article: article)
       }
