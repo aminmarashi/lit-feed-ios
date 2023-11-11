@@ -40,16 +40,6 @@ struct ArticleRow: View {
   }
 }
 
-struct Article: Identifiable, Hashable {
-  let id = UUID()
-  let image: String
-  let title: String
-  let summary: String
-  let feedName: String
-  let duration: String
-  var isRead: Bool = false
-}
-
 #Preview {
   NavigationStack {
     ArticleRow(article: sampleArticles[1])
