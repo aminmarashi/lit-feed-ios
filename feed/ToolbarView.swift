@@ -12,8 +12,10 @@ struct ToolbarView: View {
   @Binding var selectedFeed: Feed?
   var body: some View {
     List(feeds, selection: $selectedFeed) { feed in
-        NavigationLink(feed.name, value: feed)
+      NavigationLink(feed.name, value: feed)
     }
+    .navigationTitle("Feeds")
+    .accessibilityIdentifier("ToolbarView")
   }
 }
 

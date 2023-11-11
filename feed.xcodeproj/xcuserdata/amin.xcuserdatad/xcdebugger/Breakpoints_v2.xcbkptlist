@@ -75,5 +75,128 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feedUITests/feedUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "feedUITests"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - ccf93e2458e4ef67"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.__allocating_init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - 7d78f789900d8565"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - 5b55b0958e12c87a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.__allocating_init(selector: ObjectiveC.Selector) -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - cf2575c138241cab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.init(selector: ObjectiveC.Selector) -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - 8a81c0cd2d07c4d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.__allocating_init() -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - 88c8522da59a9234"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.init() -&gt; feedUITests.feedUITests"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "8AA103EC-A420-4BE8-BD69-FB1116FA9F77 - 559d38b8e301dc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feedUITests.feedUITests.__deallocating_deinit"
+                  moduleName = "feedUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/feed/feedUITests/feedUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -63,6 +63,7 @@ struct FeedView: View {
     .navigationTitle(feed.name)
     .padding(.vertical, 10)
     .padding(.horizontal, 3)
+    .accessibilityIdentifier("FeedView")
   }
 }
 

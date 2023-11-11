@@ -14,7 +14,6 @@
 		274A8EFA2AEB9119009DDE1E /* feedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A8EF92AEB9119009DDE1E /* feedTests.swift */; };
 		274A8F042AEB9119009DDE1E /* feedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A8F032AEB9119009DDE1E /* feedUITests.swift */; };
 		274A8F062AEB9119009DDE1E /* feedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A8F052AEB9119009DDE1E /* feedUITestsLaunchTests.swift */; };
-		2765C4812AFB8F1100A21F78 /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 2765C4802AFB8F1100A21F78 /* Earth.usdz */; };
 		2778DBC62AEF9BB5001BC804 /* ArticleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBC52AEF9BB5001BC804 /* ArticleRow.swift */; };
 		2778DBCA2AF0EF0B001BC804 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBC92AF0EF0B001BC804 /* FeedView.swift */; };
 		2778DBCC2AF0F401001BC804 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBCB2AF0F401001BC804 /* ArticleView.swift */; };
@@ -49,7 +48,6 @@
 		274A8EFF2AEB9119009DDE1E /* feedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = feedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		274A8F032AEB9119009DDE1E /* feedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedUITests.swift; sourceTree = "<group>"; };
 		274A8F052AEB9119009DDE1E /* feedUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2765C4802AFB8F1100A21F78 /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = Earth.usdz; path = ../../../Documents/Earth.usdz; sourceTree = "<group>"; };
 		2778DBC52AEF9BB5001BC804 /* ArticleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRow.swift; sourceTree = "<group>"; };
 		2778DBC92AF0EF0B001BC804 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		2778DBCB2AF0F401001BC804 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 		274A8F022AEB9119009DDE1E /* feedUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2765C4802AFB8F1100A21F78 /* Earth.usdz */,
 				274A8F032AEB9119009DDE1E /* feedUITests.swift */,
 				274A8F052AEB9119009DDE1E /* feedUITestsLaunchTests.swift */,
 			);
@@ -247,7 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				274A8EF02AEB9119009DDE1E /* Preview Assets.xcassets in Resources */,
-				2765C4812AFB8F1100A21F78 /* Earth.usdz in Resources */,
 				274A8EED2AEB9119009DDE1E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,8 +501,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LRZ75QF43F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -526,10 +524,13 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LRZ75QF43F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.lit.feedTests;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = code.lit.feedTests;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = code.lit.feedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -544,6 +545,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LRZ75QF43F;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.lit.feedUITests;
@@ -559,8 +561,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LRZ75QF43F;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.lit.feedUITests;
