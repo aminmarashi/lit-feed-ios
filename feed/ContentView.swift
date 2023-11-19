@@ -32,6 +32,10 @@ struct ContentView: View {
       .tabItem {
         Label("Feeds", systemImage: "list.bullet.rectangle.portrait")
       }
+      Text("under construction saved")
+        .tabItem {
+          Label("Saved", systemImage: "star")
+        }
       Text("under construction filters")
         .tabItem {
           Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
