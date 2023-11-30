@@ -13,8 +13,10 @@ struct Article: Identifiable, Hashable {
   let title: String
   let summary: String
   let feedName: String
+  let feedId = UUID()
   let duration: String
   var isRead: Bool = false
+  let date = Date()
 }
 
 let sampleArticles = [

@@ -20,6 +20,10 @@
 		2778DBCA2AF0EF0B001BC804 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBC92AF0EF0B001BC804 /* FeedView.swift */; };
 		2778DBCC2AF0F401001BC804 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBCB2AF0F401001BC804 /* ArticleView.swift */; };
 		27B975C22AF8C4C700A1C056 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B975C12AF8C4C700A1C056 /* ToolbarView.swift */; };
+		27F857782B18775B001F3344 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 27F857772B18775B001F3344 /* Auth0 */; };
+		27F8577A2B187785001F3344 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27F857792B187785001F3344 /* Auth0.plist */; };
+		27F8577C2B1878C3001F3344 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F8577B2B1878C3001F3344 /* User.swift */; };
+		27F8577E2B1878D5001F3344 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F8577D2B1878D5001F3344 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		2778DBC92AF0EF0B001BC804 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		2778DBCB2AF0F401001BC804 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		27B975C12AF8C4C700A1C056 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		27F857752B1876F6001F3344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		27F857792B187785001F3344 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		27F8577B2B1878C3001F3344 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		27F8577D2B1878D5001F3344 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F857782B18775B001F3344 /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +95,7 @@
 		274A8EDC2AEB9117009DDE1E = {
 			isa = PBXGroup;
 			children = (
+				27F857792B187785001F3344 /* Auth0.plist */,
 				274A8EE72AEB9117009DDE1E /* feed */,
 				274A8EF82AEB9119009DDE1E /* feedTests */,
 				274A8F022AEB9119009DDE1E /* feedUITests */,
@@ -106,6 +116,7 @@
 		274A8EE72AEB9117009DDE1E /* feed */ = {
 			isa = PBXGroup;
 			children = (
+				27F857752B1876F6001F3344 /* Info.plist */,
 				2754DDCB2B011A2B00990828 /* Models */,
 				274A8EE82AEB9117009DDE1E /* feedApp.swift */,
 				274A8EEA2AEB9117009DDE1E /* ContentView.swift */,
@@ -113,6 +124,7 @@
 				274A8EEE2AEB9119009DDE1E /* Preview Content */,
 				2778DBC52AEF9BB5001BC804 /* ArticleRow.swift */,
 				2778DBC92AF0EF0B001BC804 /* FeedView.swift */,
+				27F8577D2B1878D5001F3344 /* ProfileView.swift */,
 				2778DBCB2AF0F401001BC804 /* ArticleView.swift */,
 				27B975C12AF8C4C700A1C056 /* ToolbarView.swift */,
 			);
@@ -149,6 +161,7 @@
 			children = (
 				2754DDCC2B011A3C00990828 /* Feed.swift */,
 				2754DDCE2B011A7400990828 /* Article.swift */,
+				27F8577B2B1878C3001F3344 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +182,9 @@
 			dependencies = (
 			);
 			name = feed;
+			packageProductDependencies = (
+				27F857772B18775B001F3344 /* Auth0 */,
+			);
 			productName = feed;
 			productReference = 274A8EE52AEB9117009DDE1E /* feed.app */;
 			productType = "com.apple.product-type.application";
@@ -241,6 +257,9 @@
 				Base,
 			);
 			mainGroup = 274A8EDC2AEB9117009DDE1E;
+			packageReferences = (
+				27F857762B18775B001F3344 /* XCRemoteSwiftPackageReference "Auth0" */,
+			);
 			productRefGroup = 274A8EE62AEB9117009DDE1E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				274A8EF02AEB9119009DDE1E /* Preview Assets.xcassets in Resources */,
+				27F8577A2B187785001F3344 /* Auth0.plist in Resources */,
 				274A8EED2AEB9119009DDE1E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,9 +305,11 @@
 			files = (
 				274A8EEB2AEB9117009DDE1E /* ContentView.swift in Sources */,
 				2778DBCC2AF0F401001BC804 /* ArticleView.swift in Sources */,
+				27F8577E2B1878D5001F3344 /* ProfileView.swift in Sources */,
 				27B975C22AF8C4C700A1C056 /* ToolbarView.swift in Sources */,
 				2754DDCD2B011A3C00990828 /* Feed.swift in Sources */,
 				2754DDCF2B011A7400990828 /* Article.swift in Sources */,
+				27F8577C2B1878C3001F3344 /* User.swift in Sources */,
 				2778DBCA2AF0EF0B001BC804 /* FeedView.swift in Sources */,
 				2778DBC62AEF9BB5001BC804 /* ArticleRow.swift in Sources */,
 				274A8EE92AEB9117009DDE1E /* feedApp.swift in Sources */,
@@ -461,6 +483,7 @@
 				DEVELOPMENT_TEAM = LRZ75QF43F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = feed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -492,6 +515,7 @@
 				DEVELOPMENT_TEAM = LRZ75QF43F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = feed/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -632,6 +656,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27F857762B18775B001F3344 /* XCRemoteSwiftPackageReference "Auth0" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27F857772B18775B001F3344 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27F857762B18775B001F3344 /* XCRemoteSwiftPackageReference "Auth0" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 274A8EDD2AEB9117009DDE1E /* Project object */;
 }
