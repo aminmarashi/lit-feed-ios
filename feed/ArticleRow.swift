@@ -5,13 +5,6 @@ struct ArticleRow: View {
 
   var body: some View {
     HStack {
-      Image(systemName: "photo")
-        .resizable()
-        .frame(width: 50, height: 50)
-        .cornerRadius(10)
-        .foregroundColor(.gray)
-        .padding(.leading, -8)
-
       VStack(alignment: .leading) {
         NavigationLink(article.title, value: article)
           .foregroundColor(.primary)
@@ -29,9 +22,11 @@ struct ArticleRow: View {
           Text("/")
             .font(.caption)
             .opacity(article.isRead ? 0.5 : 1.0)
-          Text(article.duration)
-            .font(.caption)
-            .opacity(article.isRead ? 0.5 : 1.0)
+          if let articleDuration = article.duration {
+            Text(articleDuration)
+              .font(.caption)
+              .opacity(article.isRead ? 0.5 : 1.0)
+          }
         }
       }
     }

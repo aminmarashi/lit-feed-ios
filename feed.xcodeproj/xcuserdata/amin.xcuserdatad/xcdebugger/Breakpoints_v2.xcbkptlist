@@ -214,5 +214,181 @@
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B645AE0-C37E-4717-BEF8-52E1F6BBB994"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feed/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "loadFeeds()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4B645AE0-C37E-4717-BEF8-52E1F6BBB994 - e6c450e86a776150"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "824">
+               </Location>
+               <Location
+                  uuid = "4B645AE0-C37E-4717-BEF8-52E1F6BBB994 - e6c450e86a7760fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "880">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C800A8D8-A85D-4186-9760-39025C252499"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feed/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB003366-8DAF-4F34-AB59-D3EAFD950D45"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feed/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "loadFeeds()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FB003366-8DAF-4F34-AB59-D3EAFD950D45 - e6c450e86a7761b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "624">
+               </Location>
+               <Location
+                  uuid = "FB003366-8DAF-4F34-AB59-D3EAFD950D45 - e6c450e86a7760dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "680">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01C5E396-4DA2-4384-8748-E5EE192BEED7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feed/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "loadFeeds()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "966BA169-602F-4623-8654-ABF9050ADE07"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "feed/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "loadFeeds()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "966BA169-602F-4623-8654-ABF9050ADE07 - e6c450e86a771fc4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "1144">
+               </Location>
+               <Location
+                  uuid = "966BA169-602F-4623-8654-ABF9050ADE07 - a0e055d679947752"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Foundation.Data, __C.NSURLResponse) -&gt; Foundation.Data in feed.ContentView.loadFeeds() -&gt; ()"
+                  moduleName = "feed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amin/devel/lit-feed-ios/feed/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "1512">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

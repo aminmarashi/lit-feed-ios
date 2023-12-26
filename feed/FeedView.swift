@@ -5,70 +5,57 @@
 //  Created by Amin Marashi on 31/10/2023.
 //
 
+import Combine
 import SwiftUI
+
+struct ArticlesResponse: Decodable {
+  let message: String
+  let data: [Article]
+}
 
 struct FeedView: View {
   let feed: Feed
   @Binding var selectedArticle: Article?
-  var articles: [Article] {
-    return feed.articles
-  }
+  @State private var articles: [Article] = []
+  @State private var cancellable: AnyCancellable?
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack {
-        VStack(alignment: .leading) {
-          Text("\(articles.filter { !$0.isRead }.count) unread")
-            .font(.subheadline)
-            .foregroundColor(.gray)
-        }
-        .padding(.leading, 10)
-
-        Spacer()
-        Button(action: {
-          // Handle eye button tap
-        }) {
-          Image(systemName: "eye")
-            .font(.headline)
-            .foregroundColor(.primary)
-        }
-        .padding(.trailing, 10)
-        .buttonStyle(PlainButtonStyle())
-        Button(action: {
-          // Handle magnifying glass button tap
-        }) {
-          Image(systemName: "magnifyingglass")
-            .font(.headline)
-            .foregroundColor(.primary)
-        }
-        .padding(.trailing, 10)
-        .buttonStyle(PlainButtonStyle())
-        Button(action: {
-          // Handle checkmark button tap
-        }) {
-          Image(systemName: "checkmark.circle")
-            .font(.headline)
-            .foregroundColor(.primary)
-        }
-        .padding(.trailing, 10)
-        .buttonStyle(PlainButtonStyle())
-      }
-      .frame(height: 20)
-
       List(articles, selection: $selectedArticle) { article in
         ArticleRow(article: article)
       }
       .listStyle(PlainListStyle())
+      .onAppear {
+        loadArticles()
+      }
     }
     .navigationTitle(feed.name)
     .padding(.vertical, 10)
     .padding(.horizontal, 3)
     .accessibilityIdentifier("FeedView")
   }
+
+  func loadArticles() {
+    let url = URL(string: "http://localhost:3000/api/feeds/\(feed.id)/articles")!
+    cancellable = URLSession.shared.dataTaskPublisher(for: url)
+      .map { $0.data }
+      .decode(type: ArticlesResponse.self, decoder: JSONDecoder())
+      .receive(on: DispatchQueue.main)
+      .sink(receiveCompletion: { completion in
+        switch completion {
+        case let .failure(error):
+          print("Error: \(error)")
+        case .finished:
+          break
+        }
+      }, receiveValue: { response in
+        self.articles = response.data
+      })
+  }
 }
 
 #Preview {
   NavigationStack {
-    FeedView(feed: sampleFeeds[0], selectedArticle: .constant(sampleFeeds[0].articles[0]))
+    FeedView(feed: sampleFeeds[0], selectedArticle: .constant(sampleArticles[0]))
   }
 }
