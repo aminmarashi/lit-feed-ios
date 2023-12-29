@@ -34,6 +34,8 @@ struct ArticleRow: View {
         Text(article.summary)
           .font(.subheadline)
           .opacity(article.isRead ? 0.5 : 1.0)
+          .lineLimit(2)
+          .foregroundColor(.primary)
         HStack {
           Text("Published on")
             .font(.caption)
@@ -42,11 +44,13 @@ struct ArticleRow: View {
           Text(article.feedName)
             .font(.caption)
             .opacity(article.isRead ? 0.5 : 1.0)
-            .foregroundColor(.primary)
+            .foregroundColor(.accentColor)
+            .lineLimit(1)
           Text(relativeDateFromNow)
             .font(.caption)
             .opacity(article.isRead ? 0.5 : 1.0)
             .foregroundColor(.secondary)
+            .lineLimit(1)
         }
       }
     }

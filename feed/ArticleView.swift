@@ -7,6 +7,8 @@
 
 import SwiftUI
 import WebKit
+
+/** Render HTML content (make links clickable) from article.content if available, otherwise render article.summary */
 struct WebView: UIViewRepresentable {
   let htmlContent: String
   var navigationDelegate: WKNavigationDelegate? = NavigationDelegate()
@@ -74,12 +76,13 @@ struct ArticleView: View {
           Text(foundArticle.feedName)
             .font(.subheadline)
             .foregroundColor(.primary)
+            .lineLimit(1)
           Text(formatDate(foundArticle.date))
             .font(.subheadline)
             .foregroundColor(.secondary)
+            .lineLimit(1)
         }
         .padding(.horizontal, 20)
-        // Render HTML content (make links clickable) from article.content if available, otherwise render article.summary
         WebView(htmlContent: foundArticle.content ?? foundArticle.summary)
           .padding(.horizontal, 20)
 
