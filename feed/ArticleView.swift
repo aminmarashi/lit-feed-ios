@@ -10,11 +10,30 @@ import WebKit
 struct WebView: UIViewRepresentable {
   let htmlContent: String
   var navigationDelegate: WKNavigationDelegate? = NavigationDelegate()
+  @Environment(\.colorScheme) var colorScheme
 
   func makeUIView(context _: Context) -> WKWebView {
     let webView = WKWebView()
     webView.navigationDelegate = navigationDelegate
-    let modifiedFont = "<span style=\"font-size:200%; font-family: -apple-system, HelveticaNeue;\">\(htmlContent)</span>"
+    let textColor = colorScheme == .dark ? "white" : "black"
+    let backgroundColor = colorScheme == .dark ? "black" : "white"
+    let modifiedFont = """
+    <html>
+    <head>
+        <style>
+            body {
+                font-size:300%;
+                font-family: -apple-system, HelveticaNeue;
+                color: \(textColor);
+                background-color: \(backgroundColor);
+            }
+        </style>
+    </head>
+    <body>
+        \(htmlContent)
+    </body>
+    </html>
+    """
     webView.loadHTMLString(modifiedFont, baseURL: nil)
     return webView
   }
