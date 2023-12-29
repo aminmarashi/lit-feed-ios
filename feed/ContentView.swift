@@ -72,11 +72,12 @@ struct ContentView: View {
         }
       } else {
         if !credentialsManager.canRenew() {
-          Button("Login", action: self.login).onOpenURL { url in
-            WebAuthentication.resume(with: url)
-          }
+          Button("Login", action: self.login)
         }
       }
+    }
+    .onOpenURL { url in
+      WebAuthentication.resume(with: url)
     }
     .onAppear(perform: {
       guard self.user == nil else {
@@ -161,11 +162,13 @@ extension ContentView {
   func logout() {
     Auth0
       .webAuth()
+      .provider(WebAuthentication.safariProvider()) // Use SFSafariViewController
       .clearSession { result in
         switch result {
         case .success:
           self.user = nil
           self.accessToken = nil
+          self.credentialsManager.clear()
         case let .failure(error):
           print("Failed with: \(error)")
         }
