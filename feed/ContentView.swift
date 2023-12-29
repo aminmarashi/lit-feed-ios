@@ -20,6 +20,7 @@ struct ContentView: View {
   @State private var selectedArticle: Article?
   @State private var feeds: [Feed] = []
   @State private var cancellable: AnyCancellable?
+  @State private var accessToken: String?
 
   var body: some View {
     if let user = self.user {
@@ -27,11 +28,11 @@ struct ContentView: View {
         NavigationSplitView {
           ToolbarView(feeds: feeds, selectedFeed: $selectedFeed)
             .navigationDestination(for: Feed.self) { feed in
-              FeedView(feed: feed, selectedArticle: $selectedArticle)
+              FeedView(feed: feed, accessToken: accessToken, selectedArticle: $selectedArticle)
             }
         } content: {
           if let existingSelectedFeed = selectedFeed {
-            FeedView(feed: existingSelectedFeed, selectedArticle: $selectedArticle)
+            FeedView(feed: existingSelectedFeed, accessToken: accessToken, selectedArticle: $selectedArticle)
               .navigationDestination(for: Article.self) { article in
                 ArticleView(article: article)
               }
@@ -68,13 +69,31 @@ struct ContentView: View {
         }
       }
     } else {
-      Button("Login", action: self.login)
+      Button("Login", action: self.login).onOpenURL { url in
+        WebAuthentication.resume(with: url)
+      }
     }
   }
 
   func loadFeeds() {
-    let url = URL(string: "http://localhost:3000/api/feeds")!
-    cancellable = URLSession.shared.dataTaskPublisher(for: url)
+    guard let accessToken = accessToken else {
+      return
+    }
+    #if targetEnvironment(simulator)
+      let url = URL(string: "http://localhost:3000/api/feeds")
+    #else
+      let url = URL(string: "https://feed.lit.codes/api/feeds")
+    #endif
+
+    guard let url = url else {
+      return
+    }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+    cancellable = URLSession.shared.dataTaskPublisher(for: request)
       .map { $0.data }
       .decode(type: FeedsResponse.self, decoder: JSONDecoder())
       .receive(on: DispatchQueue.main)
@@ -95,10 +114,12 @@ extension ContentView {
   func login() {
     Auth0
       .webAuth()
+      .provider(WebAuthentication.safariProvider()) // Use SFSafariViewController
       .start { result in
         switch result {
         case let .success(credentials):
           self.user = User(from: credentials.idToken)
+          self.accessToken = credentials.accessToken
         case let .failure(error):
           print("Failed with: \(error)")
         }
@@ -112,6 +133,7 @@ extension ContentView {
         switch result {
         case .success:
           self.user = nil
+          self.accessToken = nil
         case let .failure(error):
           print("Failed with: \(error)")
         }

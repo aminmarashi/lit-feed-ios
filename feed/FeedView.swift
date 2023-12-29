@@ -15,6 +15,7 @@ struct ArticlesResponse: Decodable {
 
 struct FeedView: View {
   let feed: Feed
+  let accessToken: String?
   @Binding var selectedArticle: Article?
   @State private var articles: [Article] = []
   @State private var cancellable: AnyCancellable?
@@ -36,8 +37,20 @@ struct FeedView: View {
   }
 
   func loadArticles() {
-    let url = URL(string: "http://localhost:3000/api/feeds/\(feed.id)/articles")!
-    cancellable = URLSession.shared.dataTaskPublisher(for: url)
+    guard let accessToken = accessToken else {
+      return
+    }
+    #if targetEnvironment(simulator)
+      let url = URL(string: "http://localhost:3000/api/feeds/\(feed.id)/articles")
+    #else
+      let url = URL(string: "https://feed.lit.codes/api/feeds/\(feed.id)/articles")
+    #endif
+    guard let url = url else {
+      return
+    }
+    var request = URLRequest(url: url)
+    request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    cancellable = URLSession.shared.dataTaskPublisher(for: request)
       .map { $0.data }
       .decode(type: ArticlesResponse.self, decoder: JSONDecoder())
       .receive(on: DispatchQueue.main)
@@ -56,6 +69,6 @@ struct FeedView: View {
 
 #Preview {
   NavigationStack {
-    FeedView(feed: sampleFeeds[0], selectedArticle: .constant(sampleArticles[0]))
+    FeedView(feed: sampleFeeds[0], accessToken: nil, selectedArticle: .constant(sampleArticles[0]))
   }
 }
