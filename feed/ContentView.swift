@@ -16,6 +16,7 @@ struct FeedsResponse: Decodable {
 
 struct ContentView: View {
   @State var user: User?
+  @State private var errorMessage: String?
   @State private var selectedFeed: Feed?
   @State private var selectedArticle: Article?
   @State private var feeds: [Feed] = []
@@ -28,10 +29,14 @@ struct ContentView: View {
       if let user = self.user {
         TabView {
           NavigationSplitView {
-            ToolbarView(feeds: feeds, selectedFeed: $selectedFeed)
-              .navigationDestination(for: Feed.self) { feed in
-                FeedView(feed: feed, accessToken: accessToken, selectedArticle: $selectedArticle)
-              }
+            if let errorMessage = errorMessage {
+              Text(errorMessage)
+            } else {
+              ToolbarView(feeds: feeds, selectedFeed: $selectedFeed)
+                .navigationDestination(for: Feed.self) { feed in
+                  FeedView(feed: feed, accessToken: accessToken, selectedArticle: $selectedArticle)
+                }
+            }
           } content: {
             if let existingSelectedFeed = selectedFeed {
               FeedView(feed: existingSelectedFeed, accessToken: accessToken, selectedArticle: $selectedArticle)
@@ -127,6 +132,7 @@ struct ContentView: View {
         switch completion {
         case let .failure(error):
           print("Error: \(error)")
+          self.errorMessage = "Failed to load feeds: \(error.localizedDescription)"
         case .finished:
           break
         }
