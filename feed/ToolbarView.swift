@@ -12,6 +12,11 @@ struct FeedsResponse: Decodable {
   let data: [Feed]
 }
 
+struct fakeErrorItem: Identifiable {
+  let id = UUID()
+  let message: String
+}
+
 struct ToolbarView: View {
   let accessToken: String?
   @Binding var selectedFeed: Feed?
@@ -20,9 +25,14 @@ struct ToolbarView: View {
   @State private var errorMessage: String?
   var body: some View {
     if let errorMessage = errorMessage {
-      Text(errorMessage)
-        .navigationTitle("Feeds")
-        .accessibilityIdentifier("ToolbarView")
+      List([fakeErrorItem(message: errorMessage)]) { error in
+        Text(error.message)
+          .navigationTitle("Feeds")
+          .accessibilityIdentifier("ToolbarView")
+      }
+      .refreshable {
+        loadFeeds()
+      }
     } else {
       List(feeds, selection: $selectedFeed) { feed in
         NavigationLink(feed.name, value: feed)
@@ -32,12 +42,16 @@ struct ToolbarView: View {
       .onAppear {
         loadFeeds()
       }
+      .refreshable {
+        loadFeeds()
+      }
     }
   }
 }
 
 extension ToolbarView {
   func loadFeeds() {
+    self.errorMessage = nil
     // TODO: Show an error to the user if the accessToken is nil
     guard let accessToken = accessToken else {
       return
