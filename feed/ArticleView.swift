@@ -95,20 +95,18 @@ struct ArticleView: View {
   }
 
   func formatDate(_ dateString: String?) -> String {
-    // input dateString format: Thu, 21 Dec 2023 20:26:39 +0000
+    // input dateString format: 2023-12-26T07:28:58.508Z
     // output format: 12:01 PM - 23 Dec 26
     guard let dateString = dateString else {
       return ""
     }
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
-    let date = dateFormatter.date(from: dateString)
-    dateFormatter.dateFormat = "hh:mm a - dd MMM yy"
-    if let date = date {
-      return dateFormatter.string(from: date)
-    } else {
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    guard let date = dateFormatter.date(from: dateString) else {
       return ""
     }
+    dateFormatter.dateFormat = "h:mm a - MMM d, yy"
+    return dateFormatter.string(from: date)
   }
 }
 

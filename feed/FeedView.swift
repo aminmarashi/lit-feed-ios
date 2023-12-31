@@ -29,7 +29,7 @@ struct FeedView: View {
           .accessibilityIdentifier("FeedView")
       }
       .refreshable {
-        loadArticles()
+        refreshFeed()
       }
     } else {
       List(articles, selection: $selectedArticle) { article in
@@ -40,7 +40,7 @@ struct FeedView: View {
         loadArticles()
       }
       .refreshable {
-        loadArticles()
+        refreshFeed()
       }
       .navigationTitle(feed.name)
       .padding(.vertical, 10)
@@ -55,14 +55,15 @@ struct FeedView: View {
       return
     }
     #if targetEnvironment(simulator)
-      let url = URL(string: "http://localhost:3000/api/feeds/\(feed.id)/articles")
+      let baseUrl = URL(string: "http://localhost:3000")
     #else
-      let url = URL(string: "https://feed.lit.codes/api/feeds/\(feed.id)/articles")
+      let baseUrl = URL(string: "https://feed.lit.codes")
     #endif
-    guard let url = url else {
+    guard let baseUrl = baseUrl else {
       return
     }
-    var request = URLRequest(url: url)
+    let articlesUrl = baseUrl.appendingPathComponent("api/feeds/\(feed.id)/articles")
+    var request = URLRequest(url: articlesUrl)
     request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     cancellable = URLSession.shared.dataTaskPublisher(for: request)
       .map { $0.data }
@@ -79,6 +80,42 @@ struct FeedView: View {
       }, receiveValue: { response in
         self.articles = response.data
       })
+  }
+
+  func refreshFeed() {
+    errorMessage = nil
+    guard let accessToken = accessToken else {
+      return
+    }
+
+    #if targetEnvironment(simulator)
+      let baseUrl = URL(string: "http://localhost:3000")
+    #else
+      let baseUrl = URL(string: "https://feed.lit.codes")
+    #endif
+
+    guard let baseUrl = baseUrl else {
+      return
+    }
+
+    let refreshUrl = baseUrl.appendingPathComponent("api/feeds/\(feed.id)/refresh")
+    var request = URLRequest(url: refreshUrl)
+    request.httpMethod = "POST"
+    request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    let task = URLSession.shared.dataTaskPublisher(for: request)
+      .receive(on: DispatchQueue.main)
+      .sink(receiveCompletion: { completion in
+        switch completion {
+        case let .failure(error):
+          self.errorMessage = error.localizedDescription
+        case .finished:
+          break
+        }
+      }, receiveValue: { _ in
+        self.loadArticles()
+      })
+
+    cancellable = AnyCancellable(task)
   }
 }
 

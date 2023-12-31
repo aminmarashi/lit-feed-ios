@@ -14,7 +14,7 @@ struct ArticleRow: View {
 
     // Convert date string (JS ISO format) to Date object
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     guard let articleDate = dateFormatter.date(from: date) else {
       return ""
     }
