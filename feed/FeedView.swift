@@ -19,9 +19,19 @@ struct FeedView: View {
   @Binding var selectedArticle: Article?
   @State private var articles: [Article] = []
   @State private var cancellable: AnyCancellable?
+  @State private var errorMessage: String?
 
   var body: some View {
-    VStack(alignment: .leading) {
+    if let errorMessage = errorMessage {
+      List([ListableError(message: errorMessage)]) { error in
+        Text(error.message)
+          .navigationTitle(feed.name)
+          .accessibilityIdentifier("FeedView")
+      }
+      .refreshable {
+        loadArticles()
+      }
+    } else {
       List(articles, selection: $selectedArticle) { article in
         ArticleRow(article: article)
       }
@@ -29,14 +39,18 @@ struct FeedView: View {
       .onAppear {
         loadArticles()
       }
+      .refreshable {
+        loadArticles()
+      }
+      .navigationTitle(feed.name)
+      .padding(.vertical, 10)
+      .padding(.horizontal, 3)
+      .accessibilityIdentifier("FeedView")
     }
-    .navigationTitle(feed.name)
-    .padding(.vertical, 10)
-    .padding(.horizontal, 3)
-    .accessibilityIdentifier("FeedView")
   }
 
   func loadArticles() {
+    errorMessage = nil
     guard let accessToken = accessToken else {
       return
     }
@@ -58,6 +72,7 @@ struct FeedView: View {
         switch completion {
         case let .failure(error):
           print("Error: \(error)")
+          self.errorMessage = error.localizedDescription
         case .finished:
           break
         }

@@ -12,11 +12,6 @@ struct FeedsResponse: Decodable {
   let data: [Feed]
 }
 
-struct fakeErrorItem: Identifiable {
-  let id = UUID()
-  let message: String
-}
-
 struct ToolbarView: View {
   let accessToken: String?
   @Binding var selectedFeed: Feed?
@@ -25,7 +20,7 @@ struct ToolbarView: View {
   @State private var errorMessage: String?
   var body: some View {
     if let errorMessage = errorMessage {
-      List([fakeErrorItem(message: errorMessage)]) { error in
+      List([ListableError(message: errorMessage)]) { error in
         Text(error.message)
           .navigationTitle("Feeds")
           .accessibilityIdentifier("ToolbarView")
@@ -51,7 +46,7 @@ struct ToolbarView: View {
 
 extension ToolbarView {
   func loadFeeds() {
-    self.errorMessage = nil
+    errorMessage = nil
     // TODO: Show an error to the user if the accessToken is nil
     guard let accessToken = accessToken else {
       return
@@ -79,7 +74,7 @@ extension ToolbarView {
         switch completion {
         case let .failure(error):
           print("Error: \(error)")
-          self.errorMessage = "Failed to load feeds: \(error.localizedDescription)"
+          self.errorMessage = error.localizedDescription
         case .finished:
           break
         }
