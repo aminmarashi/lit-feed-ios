@@ -56,6 +56,8 @@ class NavigationDelegate: NSObject, WKNavigationDelegate {
 
 struct ArticleView: View {
   let article: Article?
+  @State private var showSafari = false
+  @State private var safariURL: URL? = nil
   var body: some View {
     if let foundArticle = article {
       VStack(alignment: .leading) {
@@ -69,13 +71,8 @@ struct ArticleView: View {
           }
           .frame(maxWidth: .infinity)
         }
-        Button(action: {
-          if let url = URL(string: foundArticle.href) {
-            UIApplication.shared.open(url)
-          }
-        }) {
-          Text(foundArticle.title)
-            .font(.largeTitle)
+        Link(destination: URL(string: foundArticle.href)!) {
+          Text(foundArticle.title).font(.largeTitle)
             .fontWeight(.bold)
             .minimumScaleFactor(0.1)
             .foregroundStyle(.primary)
@@ -83,6 +80,13 @@ struct ArticleView: View {
             .padding(.horizontal)
             .lineLimit(2)
         }
+        .environment(\.openURL, OpenURLAction { url in
+          safariURL = url
+          showSafari = true
+
+          return .handled
+        })
+
         HStack {
           Text("Published on")
             .font(.subheadline)
@@ -101,6 +105,11 @@ struct ArticleView: View {
           .padding(.horizontal, 20)
 
         Spacer()
+      }
+      .sheet(isPresented: $showSafari) {
+        if let url = safariURL {
+          SafariView(url: url)
+        }
       }
     } else {
       Text("No articles found")

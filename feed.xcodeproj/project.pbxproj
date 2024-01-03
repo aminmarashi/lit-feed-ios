@@ -21,6 +21,7 @@
 		2778DBCA2AF0EF0B001BC804 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBC92AF0EF0B001BC804 /* FeedView.swift */; };
 		2778DBCC2AF0F401001BC804 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2778DBCB2AF0F401001BC804 /* ArticleView.swift */; };
 		279DC0C62B414F0E0035E852 /* ListableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC0C52B414F0E0035E852 /* ListableError.swift */; };
+		279DC0C82B4552480035E852 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DC0C72B4552480035E852 /* SafariView.swift */; };
 		27B975C22AF8C4C700A1C056 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B975C12AF8C4C700A1C056 /* ToolbarView.swift */; };
 		27F857782B18775B001F3344 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 27F857772B18775B001F3344 /* Auth0 */; };
 		27F8577A2B187785001F3344 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27F857792B187785001F3344 /* Auth0.plist */; };
@@ -63,6 +64,7 @@
 		2778DBC92AF0EF0B001BC804 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		2778DBCB2AF0F401001BC804 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		279DC0C52B414F0E0035E852 /* ListableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListableError.swift; sourceTree = "<group>"; };
+		279DC0C72B4552480035E852 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		27B975C12AF8C4C700A1C056 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		27F857752B1876F6001F3344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		27F857792B187785001F3344 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				27F8577D2B1878D5001F3344 /* ProfileView.swift */,
 				2778DBCB2AF0F401001BC804 /* ArticleView.swift */,
 				27B975C12AF8C4C700A1C056 /* ToolbarView.swift */,
+				279DC0C72B4552480035E852 /* SafariView.swift */,
 			);
 			path = feed;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				2778DBCC2AF0F401001BC804 /* ArticleView.swift in Sources */,
 				27F8577E2B1878D5001F3344 /* ProfileView.swift in Sources */,
 				27B975C22AF8C4C700A1C056 /* ToolbarView.swift in Sources */,
+				279DC0C82B4552480035E852 /* SafariView.swift in Sources */,
 				2754DDCD2B011A3C00990828 /* Feed.swift in Sources */,
 				279DC0C62B414F0E0035E852 /* ListableError.swift in Sources */,
 				2754DDCF2B011A7400990828 /* Article.swift in Sources */,
