@@ -69,6 +69,20 @@ struct ArticleView: View {
           }
           .frame(maxWidth: .infinity)
         }
+        Button(action: {
+          if let url = URL(string: foundArticle.href) {
+            UIApplication.shared.open(url)
+          }
+        }) {
+          Text(foundArticle.title)
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .minimumScaleFactor(0.1)
+            .foregroundStyle(.primary)
+            .multilineTextAlignment(.leading)
+            .padding(.horizontal)
+            .lineLimit(2)
+        }
         HStack {
           Text("Published on")
             .font(.subheadline)
@@ -88,7 +102,6 @@ struct ArticleView: View {
 
         Spacer()
       }
-      .navigationTitle(foundArticle.title)
     } else {
       Text("No articles found")
     }
