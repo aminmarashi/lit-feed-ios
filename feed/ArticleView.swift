@@ -8,15 +8,35 @@
 import SwiftUI
 import WebKit
 
+class Coordinator: NSObject, WKNavigationDelegate {
+  var parent: WebView
+
+  init(_ parent: WebView) {
+    self.parent = parent
+  }
+
+  func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    if navigationAction.navigationType == .linkActivated, let url = navigationAction.request.url {
+      parent.openURL = IdentifiableURL(url: url)
+      decisionHandler(.cancel)
+    } else {
+      decisionHandler(.allow)
+    }
+  }
+}
+
 /** Render HTML content (make links clickable) from article.content if available, otherwise render article.summary */
 struct WebView: UIViewRepresentable {
   let htmlContent: String
-  var navigationDelegate: WKNavigationDelegate? = NavigationDelegate()
+  @Binding var openURL: IdentifiableURL?
   @Environment(\.colorScheme) var colorScheme
+  func makeCoordinator() -> Coordinator {
+    Coordinator(self)
+  }
 
-  func makeUIView(context _: Context) -> WKWebView {
+  func makeUIView(context: Context) -> WKWebView {
     let webView = WKWebView()
-    webView.navigationDelegate = navigationDelegate
+    webView.navigationDelegate = context.coordinator
     let textColor = colorScheme == .dark ? "white" : "black"
     let backgroundColor = colorScheme == .dark ? "black" : "white"
     let modifiedFont = """
@@ -54,9 +74,15 @@ class NavigationDelegate: NSObject, WKNavigationDelegate {
   }
 }
 
+struct IdentifiableURL: Identifiable {
+  let id = UUID()
+  let url: URL
+}
+
 struct ArticleView: View {
   let article: Article?
   @State private var showSafari = false
+  @State private var safariIdentifiableURL: IdentifiableURL? = nil
   @State private var safariURL: URL? = nil
   var body: some View {
     if let foundArticle = article {
@@ -101,7 +127,10 @@ struct ArticleView: View {
             .lineLimit(1)
         }
         .padding(.horizontal, 20)
-        WebView(htmlContent: foundArticle.content ?? foundArticle.summary)
+        WebView(htmlContent: foundArticle.content ?? foundArticle.summary, openURL: $safariIdentifiableURL)
+          .sheet(item: $safariIdentifiableURL) { identifiableURL in
+            SafariView(url: identifiableURL.url)
+          }
           .padding(.horizontal, 20)
 
         Spacer()
