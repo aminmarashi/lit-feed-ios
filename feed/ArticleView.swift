@@ -81,9 +81,7 @@ struct IdentifiableURL: Identifiable {
 
 struct ArticleView: View {
   let article: Article?
-  @State private var showSafari = false
-  @State private var safariIdentifiableURL: IdentifiableURL? = nil
-  @State private var safariURL: URL? = nil
+  @State private var safariURL: IdentifiableURL? = nil
   var body: some View {
     if let foundArticle = article {
       VStack(alignment: .leading) {
@@ -107,8 +105,7 @@ struct ArticleView: View {
             .lineLimit(2)
         }
         .environment(\.openURL, OpenURLAction { url in
-          safariURL = url
-          showSafari = true
+          safariURL = IdentifiableURL(url: url)
 
           return .handled
         })
@@ -127,18 +124,16 @@ struct ArticleView: View {
             .lineLimit(1)
         }
         .padding(.horizontal, 20)
-        WebView(htmlContent: foundArticle.content ?? foundArticle.summary, openURL: $safariIdentifiableURL)
-          .sheet(item: $safariIdentifiableURL) { identifiableURL in
+        WebView(htmlContent: foundArticle.content ?? foundArticle.summary, openURL: $safariURL)
+          .sheet(item: $safariURL) { identifiableURL in
             SafariView(url: identifiableURL.url)
           }
           .padding(.horizontal, 20)
 
         Spacer()
       }
-      .sheet(isPresented: $showSafari) {
-        if let url = safariURL {
-          SafariView(url: url)
-        }
+      .sheet(item: $safariURL) { identifiableURL in
+        SafariView(url: identifiableURL.url)
       }
     } else {
       Text("No articles found")
