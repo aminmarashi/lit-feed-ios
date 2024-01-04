@@ -105,10 +105,10 @@ struct ArticleView: View {
         }
         .environment(\.openURL, OpenURLAction { url in
           safariURL = IdentifiableURL(url: url)
-
+          
           return .handled
         })
-
+        
         HStack {
           Text("Published on")
             .font(.subheadline)
@@ -133,7 +133,9 @@ struct ArticleView: View {
       Text("No articles found")
     }
   }
+}
 
+extension ArticleView {
   func formatDate(_ dateString: String?) -> String {
     // input dateString format: 2023-12-26T07:28:58.508Z
     // output format: 12:01 PM - 23 Dec 26
@@ -148,6 +150,7 @@ struct ArticleView: View {
     dateFormatter.dateFormat = "h:mm a - MMM d, yy"
     return dateFormatter.string(from: date)
   }
+  
 }
 
 #Preview {

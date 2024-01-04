@@ -48,7 +48,9 @@ struct FeedView: View {
       .accessibilityIdentifier("FeedView")
     }
   }
+}
 
+extension FeedView {
   func loadArticles() {
     errorMessage = nil
     guard let accessToken = accessToken else {
