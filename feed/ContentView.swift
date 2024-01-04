@@ -28,13 +28,13 @@ struct ContentView: View {
             if let existingSelectedFeed = selectedFeed {
               FeedView(feed: existingSelectedFeed, accessToken: accessToken, selectedArticle: $selectedArticle)
                 .navigationDestination(for: Article.self) { article in
-                  ArticleView(article: article)
+                  ArticleView(article: article, accessToken: accessToken)
                 }
             } else {
               Text("Select a feed to view articles")
             }
           } detail: {
-            ArticleView(article: selectedArticle)
+            ArticleView(article: selectedArticle, accessToken: accessToken)
           }
           .tabItem {
             Label("Feeds", systemImage: "list.bullet.rectangle.portrait")

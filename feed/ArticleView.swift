@@ -81,6 +81,7 @@ struct IdentifiableURL: Identifiable {
 
 struct ArticleView: View {
   let article: Article?
+  let accessToken: String?
   @State private var safariURL: IdentifiableURL? = nil
   var body: some View {
     if let foundArticle = article {
@@ -105,10 +106,10 @@ struct ArticleView: View {
         }
         .environment(\.openURL, OpenURLAction { url in
           safariURL = IdentifiableURL(url: url)
-          
+
           return .handled
         })
-        
+
         HStack {
           Text("Published on")
             .font(.subheadline)
@@ -128,6 +129,9 @@ struct ArticleView: View {
       .padding(.horizontal, 10)
       .sheet(item: $safariURL) { identifiableURL in
         SafariView(url: identifiableURL.url)
+      }
+      .onAppear {
+        markArticleAsRead()
       }
     } else {
       Text("No articles found")
@@ -150,11 +154,34 @@ extension ArticleView {
     dateFormatter.dateFormat = "h:mm a - MMM d, yy"
     return dateFormatter.string(from: date)
   }
-  
+
+  func markArticleAsRead() {
+    guard let accessToken = accessToken, let article = article else {
+      return
+    }
+
+    #if targetEnvironment(simulator)
+      let baseUrl = URL(string: "http://localhost:3000")
+    #else
+      let baseUrl = URL(string: "https://feed.lit.codes")
+    #endif
+    guard let baseUrl = baseUrl else {
+      return
+    }
+
+    let url = baseUrl.appendingPathComponent("/api/articles/\(article.id)")
+    var request = URLRequest(url: url)
+    request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    request.httpMethod = "PATCH"
+    let readArticle = Article(id: article.id, image: article.image, title: article.title, summary: article.summary, feedName: article.feedName, href: article.href, feedId: article.feedId, duration: article.duration, isRead: true, isSaved: article.isSaved, date: article.date, content: article.content)
+    request.httpBody = try? JSONEncoder().encode(readArticle)
+    URLSession.shared.dataTask(with: request) { _, _, _ in
+    }.resume()
+  }
 }
 
 #Preview {
   NavigationStack {
-    ArticleView(article: sampleArticles[0])
+    ArticleView(article: sampleArticles[0], accessToken: nil)
   }
 }

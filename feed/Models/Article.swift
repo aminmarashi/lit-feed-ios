@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Article: Identifiable, Hashable, Decodable {
+struct Article: Identifiable, Hashable, Decodable, Encodable {
   let id: String
   let image: String?
   let title: String

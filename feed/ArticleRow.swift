@@ -63,7 +63,7 @@ struct ArticleRow: View {
   NavigationStack {
     ArticleRow(article: sampleArticles[1])
       .navigationDestination(for: Article.self) { article in
-        ArticleView(article: article)
+        ArticleView(article: article, accessToken: nil)
       }
   }
 }
