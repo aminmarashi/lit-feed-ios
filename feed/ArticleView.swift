@@ -101,7 +101,6 @@ struct ArticleView: View {
             .minimumScaleFactor(0.1)
             .foregroundStyle(.primary)
             .multilineTextAlignment(.leading)
-            .padding(.horizontal)
             .lineLimit(2)
         }
         .environment(\.openURL, OpenURLAction { url in
@@ -123,15 +122,10 @@ struct ArticleView: View {
             .foregroundColor(.secondary)
             .lineLimit(1)
         }
-        .padding(.horizontal, 20)
         WebView(htmlContent: foundArticle.content ?? foundArticle.summary, openURL: $safariURL)
-          .sheet(item: $safariURL) { identifiableURL in
-            SafariView(url: identifiableURL.url)
-          }
-          .padding(.horizontal, 20)
-
         Spacer()
       }
+      .padding(.horizontal, 10)
       .sheet(item: $safariURL) { identifiableURL in
         SafariView(url: identifiableURL.url)
       }
