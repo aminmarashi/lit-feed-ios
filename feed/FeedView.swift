@@ -20,6 +20,9 @@ struct FeedView: View {
   @State private var articles: [Article] = []
   @State private var cancellable: AnyCancellable?
   @State private var errorMessage: String?
+  @State private var offset = 0
+  @State private var showProgress = false
+  let limit = 10
 
   var body: some View {
     if let errorMessage = errorMessage {
@@ -32,16 +35,37 @@ struct FeedView: View {
         refreshFeed()
       }
     } else {
-      List(articles, selection: $selectedArticle) { article in
-        ArticleRow(article: article)
+      VStack {
+        List(articles, selection: $selectedArticle) { article in
+          ArticleRow(article: article)
+            .onAppear {
+              if articles.last == article {
+                showProgress = true
+                offset += limit
+                loadArticles()
+              }
+            }
+            .onTapGesture {
+              if let index = articles.firstIndex(where: { $0.id == article.id }) {
+                articles[index].isRead = true
+                selectedArticle = articles[index]
+              }
+            }
+        }
+        .listStyle(PlainListStyle())
+        .onAppear {
+          if articles.count == 0 {
+            loadArticles()
+          }
+        }
+        .refreshable {
+          refreshFeed()
+        }
+        if showProgress {
+          ProgressView()
+        }
       }
-      .listStyle(PlainListStyle())
-      .onAppear {
-        loadArticles()
-      }
-      .refreshable {
-        refreshFeed()
-      }
+
       .navigationTitle(feed.name)
       .padding(.vertical, 10)
       .padding(.horizontal, 3)
@@ -64,11 +88,41 @@ extension FeedView {
     guard let baseUrl = baseUrl else {
       return
     }
-    let articlesUrl = baseUrl.appendingPathComponent("api/feeds/\(feed.id)/articles")
+    let articlesPath = baseUrl.appendingPathComponent("api/feeds/\(feed.id)/articles")
+    var urlComponents = URLComponents(url: articlesPath, resolvingAgainstBaseURL: true)
+    urlComponents?.queryItems = [
+      URLQueryItem(name: "offset", value: "\(offset)"),
+      URLQueryItem(name: "limit", value: "\(limit)"),
+    ]
+    guard let articlesUrl = urlComponents?.url else {
+      return
+    }
     var request = URLRequest(url: articlesUrl)
     request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     cancellable = URLSession.shared.dataTaskPublisher(for: request)
-      .map { $0.data }
+      .tryMap { data, response in
+        if let httpResponse = response as? HTTPURLResponse {
+          if httpResponse.statusCode != 200 {
+            // print the response data as plaintext
+            if let responseString = String(data: data, encoding: .utf8) {
+              print("responseString: \(responseString)")
+            }
+          }
+          if httpResponse.statusCode == 200 {
+            return data
+          } else if httpResponse.statusCode == 401 {
+            throw URLError(.userAuthenticationRequired)
+          } else if httpResponse.statusCode == 403 {
+            throw URLError(.userAuthenticationRequired)
+          } else if httpResponse.statusCode == 404 {
+            throw URLError(.badURL)
+          } else {
+            throw URLError(.badServerResponse)
+          }
+        } else {
+          throw URLError(.unknown)
+        }
+      }
       .decode(type: ArticlesResponse.self, decoder: JSONDecoder())
       .receive(on: DispatchQueue.main)
       .sink(receiveCompletion: { completion in
@@ -77,10 +131,10 @@ extension FeedView {
           print("Error: \(error)")
           self.errorMessage = error.localizedDescription
         case .finished:
-          break
+          showProgress = false
         }
       }, receiveValue: { response in
-        self.articles = response.data
+        articles.append(contentsOf: response.data)
       })
   }
 

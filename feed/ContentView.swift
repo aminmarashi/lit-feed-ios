@@ -91,7 +91,7 @@ struct ContentView: View {
     })
   }
 }
-
+  
 extension ContentView {
   func login() {
     Auth0

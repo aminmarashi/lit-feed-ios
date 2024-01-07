@@ -16,8 +16,8 @@ struct Article: Identifiable, Hashable, Decodable, Encodable {
   let href: String
   let feedId: String?
   let duration: String?
-  let isRead: Bool
-  let isSaved: Bool
+  var isRead: Bool
+  var isSaved: Bool
   let date: String?
   let content: String?
 }

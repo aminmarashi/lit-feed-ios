@@ -175,7 +175,12 @@ extension ArticleView {
     request.httpMethod = "PATCH"
     let readArticle = Article(id: article.id, image: article.image, title: article.title, summary: article.summary, feedName: article.feedName, href: article.href, feedId: article.feedId, duration: article.duration, isRead: true, isSaved: article.isSaved, date: article.date, content: article.content)
     request.httpBody = try? JSONEncoder().encode(readArticle)
-    URLSession.shared.dataTask(with: request) { _, _, _ in
+    URLSession.shared.dataTask(with: request) { _, response, error in
+      if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+        print("Successfully marked article \(article.id) as read")
+      } else if let error = error {
+        print("Failed to mark article as read: \(error)")
+      }
     }.resume()
   }
 }
