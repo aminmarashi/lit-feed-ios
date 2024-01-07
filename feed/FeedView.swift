@@ -55,7 +55,7 @@ struct FeedView: View {
         .listStyle(PlainListStyle())
         .onAppear {
           if articles.count == 0 {
-            loadArticles()
+            refreshFeed()
           }
         }
         .refreshable {
@@ -168,6 +168,8 @@ extension FeedView {
           break
         }
       }, receiveValue: { _ in
+        self.articles = []
+        self.offset = 0
         self.loadArticles()
       })
 
