@@ -22,6 +22,7 @@ struct FeedView: View {
   @State private var errorMessage: String?
   @State private var offset = 0
   @State private var showProgress = false
+  @State private var showProgressAtTop = false
   let limit = 10
 
   var body: some View {
@@ -54,15 +55,23 @@ struct FeedView: View {
         }
         .listStyle(PlainListStyle())
         .onAppear {
-          if articles.count == 0 {
-            refreshFeed()
-          }
+          loadArticles()
         }
         .refreshable {
           refreshFeed()
         }
+        .overlay(
+          Group {
+            if showProgressAtTop {
+              ProgressView()
+                .scaleEffect(2.0, anchor: .center)
+                .progressViewStyle(CircularProgressViewStyle(tint: .primary))
+            }
+          }
+        )
         if showProgress {
           ProgressView()
+            .scaleEffect(1.5, anchor: .center)
         }
       }
 
@@ -131,14 +140,17 @@ extension FeedView {
           print("Error: \(error)")
           self.errorMessage = error.localizedDescription
         case .finished:
+          showProgressAtTop = false
           showProgress = false
         }
       }, receiveValue: { response in
+        print("data json: \(response.data)")
         articles.append(contentsOf: response.data)
       })
   }
 
   func refreshFeed() {
+    showProgressAtTop = true
     errorMessage = nil
     guard let accessToken = accessToken else {
       return
