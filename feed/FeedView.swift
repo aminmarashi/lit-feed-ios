@@ -38,20 +38,20 @@ struct FeedView: View {
     } else {
       VStack {
         List(articles, selection: $selectedArticle) { article in
-          ArticleRow(article: article)
-            .onAppear {
-              if articles.last == article {
-                showProgress = true
-                offset += limit
-                loadArticles()
-              }
+          ArticleRow(article: article) { article in
+            if let index = articles.firstIndex(where: { $0.id == article.id }) {
+              articles[index].isRead = true
+              selectedArticle = articles[index]
             }
-            .onTapGesture {
-              if let index = articles.firstIndex(where: { $0.id == article.id }) {
-                articles[index].isRead = true
-                selectedArticle = articles[index]
-              }
+          }
+          .onAppear {
+            if articles.last == article {
+              showProgress = true
+              offset += limit
+              loadArticles()
             }
+          }
+          .onTapGesture {}
         }
         .listStyle(PlainListStyle())
         .onAppear {

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ArticleRow: View {
   let article: Article
+  let articleTapped: (Article) -> Void
 
   // Calculated property called relativeDateFromNow that returns a string for relatiive date from now from the article's date
   var relativeDateFromNow: String {
@@ -30,6 +31,9 @@ struct ArticleRow: View {
           .font(.headline)
           .fontWeight(.bold)
           .opacity(article.isRead ? 0.5 : 1.0)
+          .onTapGesture {
+            articleTapped(article)
+          }
 
         Text(article.summary)
           .font(.subheadline)
@@ -61,9 +65,11 @@ struct ArticleRow: View {
 
 #Preview {
   NavigationStack {
-    ArticleRow(article: sampleArticles[1])
-      .navigationDestination(for: Article.self) { article in
-        ArticleView(article: article, accessToken: nil)
-      }
+    ArticleRow(article: sampleArticles[1]) {
+      _ in
+    }
+    .navigationDestination(for: Article.self) { article in
+      ArticleView(article: article, accessToken: nil)
+    }
   }
 }
